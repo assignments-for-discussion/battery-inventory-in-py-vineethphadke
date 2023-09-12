@@ -1,9 +1,22 @@
-
 def count_batteries_by_health(present_capacities):
+  rated_capacity = 120
+  healthy_count, exchange_count, failed_count = 0,0,0
+  SoH =  0 
+  for i in present_capacities:
+    if(i<0 or i>120):   #checking boundary conditions
+        continue
+    SoH = 100 * int(i) / rated_capacity
+    if SoH >80 :
+      healthy_count += 1
+    elif SoH >63 and SoH <=80:
+      exchange_count +=1
+    else:
+      failed_count += 1
+      
   return {
-    "healthy": 0,
-    "exchange": 0,
-    "failed": 0
+    "healthy": healthy_count,
+    "exchange": exchange_count,
+    "failed": failed_count
   }
 
 
